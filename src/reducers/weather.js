@@ -1,7 +1,10 @@
 import { SET_WEATHER, SET_LOADING } from "../actions/types";
 
 const initialState = {
-    weatherList: null,
+    city: '',
+    country: '',
+    coord: null,
+    forecast: null,
     loading: false
 }
 
@@ -12,13 +15,16 @@ export default function(state = initialState, action) {
         case SET_WEATHER:
             return {
                 ...state,
-                weatherList: payload,
+                city: payload.city,
+                country: payload.country,
+                coord: payload.coord,
+                forecast: payload.weatherList,
                 loading: false
             }
         case SET_LOADING:
             return {
                 ...state,
-                weatherList: null,
+                forecast: null,
                 loading: payload
             }
         default:

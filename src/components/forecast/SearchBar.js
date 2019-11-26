@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { searchByCity } from '../../actions/search';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import c from './forecast.css';
+
 
 const SearchBar = ({searchByCity}) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -17,7 +17,7 @@ const SearchBar = ({searchByCity}) => {
     return (
         <Fragment>
             <div className="row">
-                <form onSubmit={e => handleSubmit(e)} className="search">
+                <form className="search"  onSubmit={e => handleSubmit(e)}>
                     <h5>Search your city?</h5>
                     <input type="text" className="bar" value={searchQuery} onChange={e => onChange(e)}></input>
                     <button type="submit" className="btn">

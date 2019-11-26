@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import c from './forecast.css';
+import './forecast.css';
 
 const WeatherItem = ({city, country, ddate, desc, temp, coord, icon}) => {
   

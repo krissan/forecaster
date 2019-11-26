@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../Spinner';
 import WeatherItem from './WeatherItem';
-import c from './forecast.css';
+import './forecast.css';
 
 import { fadeInLeft } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
@@ -12,9 +12,9 @@ const FadeIn = styled.div`
     animation: 1s ${keyframes`${fadeInLeft}`};
 `;
 
-const Result = ({weather: {weatherList, loading}, current}) => {  
+const Result = ({weather: {city, country, coord, forecast, loading}}) => {  
 
-    return current.city === '' || weatherList === null  ?
+    return forecast == null  ?
         loading ?
             <Spinner />
         :
@@ -29,15 +29,16 @@ const Result = ({weather: {weatherList, loading}, current}) => {
 
         <div className="row current">
             <FadeIn>
-                <WeatherItem 
-                                    icon={current.icon}
-                                    city={current.city}
-                                    country={current.country}
-                                    ddate={current.ddate}
-                                    desc={current.desc}
-                                    temp={current.temp}
-                                    coord={current.coord}
-                                />
+                <WeatherItem
+                    key ={0}
+                    icon={forecast[0].icon}
+                    city={city}
+                    country={country}
+                    ddate={forecast[0].ddate}
+                    desc={forecast[0].desc}
+                    temp={forecast[0].temp}
+                    coord={coord}
+                />
             </FadeIn>
         </div>
 
@@ -47,20 +48,17 @@ const Result = ({weather: {weatherList, loading}, current}) => {
 
         <div className="row forecast">
             {
-                weatherList.forecast.map((ele, index) => {
-                    let dateObj = new Date(ele.dt * 1000);
-                    let ddate = dateObj.toUTCString();
-
+                forecast.slice(1).map((ele, i) => {
                     return <FadeIn>
-                        <WeatherItem 
-                            key={index}
-                            icon={ele.weather[0].icon}
-                            city={weatherList.city}
-                            country={weatherList.country}
-                            ddate={ddate}
-                            desc={ele.weather[0].description}
-                            temp={ele.main.temp}
-                            coord={weatherList.coord}
+                        <WeatherItem
+                            key ={i}
+                            icon={forecast[i].icon}
+                            city={city}
+                            country={country}
+                            ddate={forecast[i].ddate}
+                            desc={forecast[i].desc}
+                            temp={forecast[i].temp}
+                            coord={coord}
                         />
                     </FadeIn>
                 })
@@ -70,13 +68,11 @@ const Result = ({weather: {weatherList, loading}, current}) => {
 }
 
 Result.propTypes = {
-    weather: PropTypes.object.isRequired,
-    current: PropTypes.object.isRequired
+    weather: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    weather: state.weather,
-    current: state.current
+    weather: state.weather
 });
 
 export default connect(mapStateToProps)(Result);

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -9,14 +9,12 @@ import Result from './components/forecast/Result';
 function App() {
   return (
     <Provider store={store}>
-      <Fragment>
-        <div className="App">
-          <div className="container">
-              <SearchBar/>
-              <Result/>
-          </div>
+      <div className="App">
+        <div className="container">
+            <SearchBar/>
+            <Result/>
         </div>
-      </Fragment>
+      </div>
     </Provider>
   );
 }
