@@ -1,13 +1,18 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import c from './forecast.css';
 
 const WeatherItem = ({city, country, ddate, desc, temp, coord, icon}) => {
   
 
     return (
         <Fragment>
-            <div className="card">
-                <img alt={desc+' img'} src={'http://openweathermap.org/img/wn/'+icon+'@2x.png'} width="50" height="50"></img>
+            <div className="wCard card">
+                <img    alt={desc+' img'} 
+                        src={'http://openweathermap.org/img/wn/'+icon+'@2x.png'} 
+                        width="50" 
+                        height="50">
+                </img>
                 <div>{city}</div>
                 <div>{country}</div>
                 <div>{ddate}</div>

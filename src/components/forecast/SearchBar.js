@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { searchByCity } from '../../actions/search';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import c from './forecast.css';
 
 const SearchBar = ({searchByCity}) => {
     const [searchQuery, setSearchQuery] = useState('');

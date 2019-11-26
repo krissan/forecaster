@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../Spinner';
 import WeatherItem from './WeatherItem';
+import c from './forecast.css';
 
+import { fadeInLeft } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+
+const FadeIn = styled.div`
+    animation: 1s ${keyframes`${fadeInLeft}`};
+`;
 
 const Result = ({weather: {weatherList, loading}, current}) => {  
 
@@ -21,15 +28,17 @@ const Result = ({weather: {weatherList, loading}, current}) => {
         </div>
 
         <div className="row current">
-            <WeatherItem 
-                                icon={current.icon}
-                                city={current.city}
-                                country={current.country}
-                                ddate={current.ddate}
-                                desc={current.desc}
-                                temp={current.temp}
-                                coord={current.coord}
-                            />
+            <FadeIn>
+                <WeatherItem 
+                                    icon={current.icon}
+                                    city={current.city}
+                                    country={current.country}
+                                    ddate={current.ddate}
+                                    desc={current.desc}
+                                    temp={current.temp}
+                                    coord={current.coord}
+                                />
+            </FadeIn>
         </div>
 
         <div className="row">
@@ -42,7 +51,8 @@ const Result = ({weather: {weatherList, loading}, current}) => {
                     let dateObj = new Date(ele.dt * 1000);
                     let ddate = dateObj.toUTCString();
 
-                    return <WeatherItem 
+                    return <FadeIn>
+                        <WeatherItem 
                             key={index}
                             icon={ele.weather[0].icon}
                             city={weatherList.city}
@@ -52,6 +62,7 @@ const Result = ({weather: {weatherList, loading}, current}) => {
                             temp={ele.main.temp}
                             coord={weatherList.coord}
                         />
+                    </FadeIn>
                 })
             }
         </div>
